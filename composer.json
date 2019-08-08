@@ -1,0 +1,26 @@
+{
+    "name": "shineyork/laravel-package-builder",
+    "description": "A composer laravel package builder.",
+    "keywords": ["composer", "package", "php", "laravel-package-builder"],
+    "autoload": {
+        "psr-4": {
+            "ShineYork\\LaravelPackageBuilder\\": "src"
+        }
+    },
+    "require": {
+        "symfony/console": "^3.0|^4.0",
+        "symfony/process": "^3.0|^4.0",
+        "symfony/filesystem": "^3.0|^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    },
+    "bin": ["bin/laravel-package-builder"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "shineyork",
+            "email": "shineyork@sixstaredu.com"
+        }
+    ]
+}
