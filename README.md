@@ -7,7 +7,7 @@
 
 
 ```shell
-$ composer global require 'shineyork/laravel-package-builder'
+$ composer global require shineyork/laravel-package-builder:dev-master
 ```
 
 # 命令目录
