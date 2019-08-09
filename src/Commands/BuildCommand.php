@@ -176,27 +176,35 @@ class BuildCommand extends Command
      */
     protected function createPackage(array $config)
     {
-        $this->fs->mkdir($this->packageDirectory, 0755);
+        $folder = [
+            '/Config/',
+            '/Console/Commands/',
+            '/Database/migrations/',
+            '/Facades/',
+            '/Http/Controllers/',
+            '/Http/Middleware/',
+            '/Models/',
+            '/Providers/',
+            '/Resources/views/',
+            '/Resources/assets/js/',
+            '/Resources/assets/css/',
+            '/Resources/assets/img/',
+        ];
 
-        // config
-        $this->fs->mkdir($this->packageDirectory.'/Config/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Console/Commands/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Database/migrations/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Facades/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Http/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Http/Middleware/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Models/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Providers/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Resources/view/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Resources/assets/css/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Resources/assets/js/', 0755);
-        $this->fs->mkdir($this->packageDirectory.'/Resources/assets/img/', 0755);
+        foreach ($folder as $key => $value) {
+            $this->fs->mkdir($this->packageDirectory.$value, 0755);
+        }
 
+        $file = [
+            '/Config/config.php' => 'Config/config.php',
+            '/Http/Controllers/Controller.php' => 'Http/Controllers/Controller.php',
+            '/Http/routes.php' => 'Http/routes.php',
+            '/Providers/LaravelServiceProviders.php' => 'Providers/'.$this->laravel['PROVIDER_NAME'].'.php'
+        ];
 
-        $this->copyFile('/Config/config.php', 'Config/config.php');
-        $this->copyFile('/Http/Controllers/Controller.php', 'Http/Controllers/Controller.php');
-        $this->copyFile('/Http/routes.php', 'Http/routes.php');
-        $this->copyFile('/Providers/LaravelServiceProviders.php', 'Providers/'.$this->laravel['PROVIDER_NAME'].'.php');
+        foreach ($file as $key => $value) {
+            $this->copyFile($key, $value);
+        }
 
         $this->copyReadmeFile($config);
 
